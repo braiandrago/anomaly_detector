@@ -21,10 +21,13 @@ HTML_TEMPLATE = """
     <h3>Zoom de los últimos 20 registros</h3>
     <img src="{{ grafico_train_zoom }}" alt="Zoom entrenamiento" width="800">
 
-    <h2>2. Datos recientes desde producción</h2>
+    <h2>2. Evolución del entrenamiento (Train vs Validation Loss)</h2>
+    <img src="{{ grafico_history }}" alt="Gráfico de pérdida de entrenamiento" width="800">
+
+    <h2>3. Datos recientes desde producción</h2>
     <img src="{{ grafico_live }}" alt="Gráfico live" width="800">
 
-    <h2>3. Detección de Anomalías</h2>
+    <h2>4. Detección de Anomalías</h2>
     <h3>Umbral de Detección: {{ threshold }}</h3>
     <h3>Total de Anomalías Detectadas: {{ total_anomalias }}</h3>
     <img src="{{ grafico_anomalias }}" alt="Gráfico de Anomalías" width="800">
@@ -139,6 +142,8 @@ def generar_reporte(tipo, threshold=None):
     else:
         recomendacion = "No se detectaron anomalías relevantes. Continuar operación normal."
 
+    path_history = os.path.join(REPORTS_DIR, f"training_loss_{tipo_short}.png")
+
     template = Template(HTML_TEMPLATE)
     html = template.render(
         tipo=tipo,
@@ -147,6 +152,7 @@ def generar_reporte(tipo, threshold=None):
         grafico_train=os.path.basename(path_train),
         grafico_train_zoom=os.path.basename(path_train_zoom),
         grafico_live=os.path.basename(path_live),
+        grafico_history=os.path.basename(path_history),
         grafico_anomalias=os.path.basename(path_anomalias),
         recomendacion=recomendacion
     )
