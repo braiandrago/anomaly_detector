@@ -45,9 +45,9 @@ X = np.array(X)
 n_features = X.shape[2]
 model = keras.Sequential([
     layers.Input(shape=(SEQ_LENGTH, n_features)),
-    layers.LSTM(64, activation="relu", return_sequences=False),
+    layers.LSTM(16, activation="relu", return_sequences=False),
     layers.RepeatVector(SEQ_LENGTH),
-    layers.LSTM(64, activation="relu", return_sequences=True),
+    layers.LSTM(16, activation="relu", return_sequences=True),
     layers.TimeDistributed(layers.Dense(n_features))
 ])
 
