@@ -10,7 +10,7 @@ from joblib import dump
 
 # Configuraciones
 SEQ_LENGTH = 30
-TIPO = "multivariado"  # cambiar a "univariado / multivariado" si entrenás ese modelo
+TIPO = "univariado"  # cambiar a "univariado / multivariado" si entrenás ese modelo
 tipo_short = "uni" if TIPO == "univariado" else "multi"
 data_path = f"data/raw/train_{tipo_short}.csv"
 model_path = f"models/model_{tipo_short}.h5"
@@ -76,5 +76,6 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.savefig(f"models/training_loss_{tipo_short}.png")
+plt.savefig(f"reports/training_loss_{tipo_short}.png")
 plt.close()
 
