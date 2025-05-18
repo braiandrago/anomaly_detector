@@ -1,4 +1,6 @@
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -8,8 +10,10 @@ from tensorflow.keras.losses import MeanSquaredError
 from sklearn.preprocessing import MinMaxScaler
 from joblib import dump
 
+from config import SEQ_LENGTH  # ahora se importa desde config.py
+
 # Configuraciones
-SEQ_LENGTH = 30
+#SEQ_LENGTH = 30
 TIPO = "univariado"  # cambiar a "univariado / multivariado" si entrenás ese modelo
 tipo_short = "uni" if TIPO == "univariado" else "multi"
 data_path = f"data/raw/train_{tipo_short}.csv"
