@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -7,10 +8,12 @@ from joblib import load
 from tensorflow import keras
 from sklearn.metrics import mean_squared_error
 
+from config import SEQ_LENGTH
+
 from generate_report import generar_reporte
 
 # Configuraciones
-SEQ_LENGTH = 30
+#SEQ_LENGTH = 30
 
 def run_inference(tipo, path_csv):
     tipo_short = "uni" if tipo == "univariado" else "multi"
