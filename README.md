@@ -1,8 +1,8 @@
 # 🔎 Sistema de Detección de Anomalías en Series de Tiempo con Autoencoders (Univariado y Multivariado)
 
-Este proyecto implementa un sistema de detección de anomalías en series temporales, utilizando Autoencoders Recurrentes (RNN con LSTM) con Keras. Se soportan tanto modelos **univariados** como **multivariados**, pensados para ser utilizados en entornos industriales de monitoreo de procesos.
+Este proyecto implementa un sistema de detección de anomalías en series temporales, utilizando Autoencoders Recurrentes (RNN con LSTM) con Keras. Se soportan tanto modelos *univariados* como *multivariados*, pensados para ser utilizados en entornos industriales de monitoreo de procesos.
 
-Particularmente se simula un sistema industrial que genera datos de proceso cada minuto, los cuales son analizados cada 15 minutos por un modelo de detección de anomalías basado en Autoencoders. El sistema cuenta con versiones univariadas y multivariadas.
+Particularmente se simula un sistema industrial que genera datos de proceso (ej: temperatura) cada minuto, los cuales son analizados cada 15 minutos por un modelo de detección de anomalías basado en Autoencoders.
 
 ---
 
@@ -33,7 +33,8 @@ anomaly_detector/
 ├── run_uni.py             # Ejecuta el flujo completo univariado
 ├── run_multi.py           # Ejecuta el flujo completo multivariado
 ├── data_simulation.py     # Script para generar los datasets
-├── README.md              # Este archivo
+├── config.py              # Script de configuración para entrenamiento, inferencia y simulación
+├── README.md              # Descripción integral del proyecto
 └── .gitignore
 ```
 ---
@@ -58,7 +59,7 @@ Este script:
 - Entrena un Autoencoder LSTM
 - Guarda el modelo y el scaler
 
-> Cambiá la variable `TIPO = "multivariado"` si deseás entrenar el modelo multivariado.
+> Cambiar la variable `TIPO = "multivariado"` si se desea entrenar el modelo multivariado.
 
 ---
 
@@ -89,7 +90,8 @@ python src/inference.py multivariado data/raw/test_multi.csv
 Cada vez que se ejecuta una inferencia se genera un HTML con:
 - Gráfico de la serie original de entrenamiento
 - Zoom de los últimos 20 puntos del entrenamiento
-- Gráfico de los datos actuales (live: simulación de datos de producción) 
+- Gráfico de los datos actuales (live: simulación de datos de producción)
+- Gráfico de evolución del entrenamiento (Train vs Validation Loss)  
 - Detección de anomalías con umbral y sombreado
 - Recomendación en lenguaje natural
 
@@ -97,7 +99,8 @@ Cada vez que se ejecuta una inferencia se genera un HTML con:
 
 ## 🧠 Modelo utilizado
 - Autoencoder con LSTM
-- Secuencias de longitud 30 (ej: 30 minutos de datos cada 1 min)
+- Secuencias de longitud 20 (ej: 20 minutos de datos cada 1 min)
+- La longitud de las secuencia y la cantidad de secuencias se definden en `config.py`
 
 ## 🧠 Lógica del Umbral
 El sistema detecta anomalías comparando el **error de reconstrucción** de cada secuencia con un umbral fijo calculado así:
