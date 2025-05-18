@@ -1,14 +1,17 @@
-import pandas as pd
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import pandas as pd
 import numpy as np
+from config import SEQ_LENGTH, N_SECUENCIAS
 
 # Configuración
 ORIGEN_UNI = "data/raw/test_uni.csv"
 ORIGEN_MULTI = "data/raw/test_multi.csv"
 DESTINO_UNI = "data/raw/live_uni.csv"
 DESTINO_MULTI = "data/raw/live_multi.csv"
-SEQ_LENGTH = 30
-N_SECUENCIAS = 1  # solo 1 secuencia por ejecución
+#SEQ_LENGTH = 30
+#N_SECUENCIAS = 10  # solo 1 secuencia por ejecución / más de una secuencia (cambiar según requerimiento)
 
 # Cargar datasets simulados (test)
 df_uni = pd.read_csv(ORIGEN_UNI, parse_dates=["timestamp"])
